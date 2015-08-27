@@ -3,7 +3,11 @@ var router = express.Router();
 var State = require('./state');
 var _ = require('lodash');
 
-var states = [new State('at_home', false), new State('yams', 'baked')];
+/* test states */
+var states = [
+    new State('at_home', false),
+    new State('yams', 'baked')];
+
 /* GET users listing. */
 router.get('/:name', function(req, res, next) {
     var state = _.find(states, function(s){return s._name == req.params.name});
