@@ -5,11 +5,17 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var State = require('./states/state');
+var states_collection = [
+    new State('at_home', false),
+    new State('yams', 'baked')];
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var states = require('./states/route');
-
+var states = require('./states/route')(states_collection);
+var scenes = require ('./scenes/route');
 var app = express();
+
 
 
 // view engine setup
@@ -27,6 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/states', states);
+app.use('/scenes', scenes);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
